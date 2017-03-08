@@ -4,17 +4,17 @@ set -x
 
 STACK_NAME=$(curl http://rancher-metadata/latest/self/stack/name)
 
-FIRST_MDM_IP=${STACK_NAME}_primary-mdm_1
-SECOND_MDM_IP=${STACK_NAME}_mdm_1
-TB_IP=${STACK_NAME}_tb_1
-FIRST_SDS_IP=${STACK_NAME}_sds_1
-SECOND_SDS_IP=${STACK_NAME}_sds_2
-THIRD_SDS_IP=${STACK_NAME}_sds_3
+FIRST_MDM_IP=${STACK_NAME}-primary-mdm-1
+SECOND_MDM_IP=${STACK_NAME}-mdm-1
+TB_IP=${STACK_NAME}-tb-1
+FIRST_SDS_IP=${STACK_NAME}-sds-1
+SECOND_SDS_IP=${STACK_NAME}-sds-2
+THIRD_SDS_IP=${STACK_NAME}-sds-3
 
 until </dev/tcp/$SECOND_MDM_IP/9011 > /dev/null; do echo "waiting for secondary mdm..." && sleep 5 ; done
 
-FIRST_MDM_ACTUAL_IP=$(dig +short ${STACK_NAME}_primary-mdm_1)
-SECOND_MDM_ACTUAL_IP=$(dig +short ${STACK_NAME}_mdm_1)
+FIRST_MDM_ACTUAL_IP=$(dig +short ${STACK_NAME}-primary-mdm-1)
+SECOND_MDM_ACTUAL_IP=$(dig +short ${STACK_NAME}-mdm-1)
 
 rpm -Uvh EMC-ScaleIO-gateway-1.32-3455.5.noarch.rpm 
 
